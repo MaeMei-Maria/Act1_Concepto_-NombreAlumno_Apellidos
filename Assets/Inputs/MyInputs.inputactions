@@ -35,8 +35,26 @@
                 },
                 {
                     "name": "ChangeWeapon",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "56e85e55-b4c9-45f7-8d33-1a67caf96489",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Weapon1",
+                    "type": "Button",
+                    "id": "36b814d6-4068-41f0-bf25-ba7686f147f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon2",
+                    "type": "Button",
+                    "id": "7049a66b-0e1c-4150-acc7-39a527b254aa",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -155,13 +173,79 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "18e44cee-c0e8-4e10-8cb0-bc0a65e7ec1b",
-                    "path": "",
+                    "name": "1D Axis",
+                    "id": "fc33dfdd-c808-40e0-9fb3-344418ed9f82",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ChangeWeapon",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "c38776a3-1ca0-4825-9411-881e4c3c275f",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "ChangeWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "59a765f4-e019-4db1-8928-4e542503c54c",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "ChangeWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "cd3c45f7-49b0-4c61-9e8e-43892eafa011",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Weapon1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "724ccb53-2149-4033-ae16-7caee0b91384",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Weapon1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24d7dcc8-5cf4-47e5-8988-4afa2d03a8b3",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Weapon2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5149c0da-be1f-4906-a8ac-80a305be80a5",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Weapon2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
@@ -32,7 +31,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputController.Instance.OnJump +=  Jump;
+        InputController.Instance.OnJump += Jump;
         InputController.Instance.OnMove += UpdateMovement;
     }
     private void UpdateMovement(Vector2 inputVector)
