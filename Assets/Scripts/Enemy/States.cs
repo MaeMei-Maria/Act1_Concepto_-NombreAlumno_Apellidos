@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public abstract class States : MonoBehaviour
+public abstract class States<T> : MonoBehaviour where T : FSMController<T> //Le indica a la clase que T debe heredar de FSMController<T>
 {
-    protected FSMController _controller;
+    protected T _controller;
 
-    public virtual void InitController(FSMController controller) //Inicializa el controlador para cualquier estado.
+    public virtual void InitController(T controller) //Inicializa el controlador para cualquier estado.
     {
         this._controller = controller;
     }

@@ -1,20 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using FSM.Enemy;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrolState : States
+public class PatrolState : States<EnemyController>
 {
-    [SerializeField] private Transform[] patrolPath;
-    [SerializeField] private SensorSystem sensor;
-    [SerializeField] private float waitTime = 2f;
+    [SerializeField] private Transform patrolPath;
+    [SerializeField] private float patrolSpeed = 3.5f;
 
-    private List<Vector3> patrolPoints = new();
+    [SerializeField] private float waitTime = 1f;
+
+    private List<Vector3> patrolPoints = new ();
     
-    private NavMeshAgent agent;
     private int currentPatrolIndex;
+    
+    private static readonly int Speed = Animator.StringToHash("speed");
 
-    public override void InitController(FSMController controller)
+    public override void InitController(EnemyController controller)
     {
         base.InitController(controller);
         
@@ -23,12 +27,25 @@ public class PatrolState : States
         {
             patrolPoints.Add(points.position);
         }
-        
-        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void OnEnable()
+    {
+        _controller.Sensor.OnPlayerDetected += StopPatrol;
+    }
+
+    private void StopPatrol(Transform newTarget)
+    {
+        StopAllCoroutines();
+        _controller.Agent.isStopped = true;
+        _controller.SetState(_controller.ChaseState);
     }
 
     public override void OnEnter()
     {
+        _controller.Agent.stoppingDistance = 0f;
+        _controller.Agent.speed = patrolSpeed;
+        _controller.Agent.isStopped = false;
         StartCoroutine(PatrolAndWait());
     }
 
@@ -36,8 +53,8 @@ public class PatrolState : States
     {
         while (true)
         {
-            agent.SetDestination(patrolPoints[currentPatrolIndex]);
-            yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+            _controller.Agent.SetDestination(patrolPoints[currentPatrolIndex]);
+            yield return new WaitUntil(() => !_controller.Agent.pathPending && _controller.Agent.remainingDistance <= _controller.Agent.stoppingDistance);
             yield return new WaitForSeconds(waitTime);
             
             CalculateNewPoint();
@@ -46,16 +63,20 @@ public class PatrolState : States
 
     private void CalculateNewPoint()
     {
-        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPath.Length;
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
     }
 
     public override void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        _controller.Animator.SetFloat(Speed, _controller.Agent.velocity.magnitude/_controller.MaximumSpeed);
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+    }
+
+    private void OnDisable()
+    {
+        _controller.Sensor.OnPlayerDetected -= StopPatrol;
     }
 }

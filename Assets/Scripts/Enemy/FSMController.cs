@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class FSMController : MonoBehaviour
+public class FSMController<T> : MonoBehaviour where T : FSMController<T> //Le indica a la clase que T debe heredar de FSMController<T>
 {
-   private States currentState;
+   private States<T> currentState;
 
    private void Update()
    {
@@ -13,14 +13,14 @@ public class FSMController : MonoBehaviour
       }
    }
 
-   public void SetState(States newState) //Comprueba si hay un estado anterior y lo actualiza.
+   public void SetState(States<T> newState) //Comprueba si hay un estado anterior y lo actualiza.
    {
       if (currentState)
       {
          currentState.OnExit();
       }
       
-      currentState.OnEnter();
       currentState = newState;
+      currentState.OnEnter();
    }
 }

@@ -8,7 +8,7 @@ public class SensorSystem : MonoBehaviour
     [SerializeField] private float sensorAngle = 65f;
     [SerializeField] private LayerMask obstaclesMask;
     
-    public event Action OnPlayerDetected, OnPlayerLost;
+    public event Action<Transform> OnPlayerDetected, OnPlayerLost;
     
     private SphereCollider sensorCollider;
 
@@ -22,6 +22,8 @@ public class SensorSystem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player Detectado");
+
             CheckDetection(other);
         }
     }
@@ -37,16 +39,16 @@ public class SensorSystem : MonoBehaviour
         if (Vector3.Angle(directionToTarget, transform.forward) < sensorAngle / 2f)
         {
             Debug.Log("Player en rango");
-            OnPlayerDetected?.Invoke();
+            OnPlayerDetected?.Invoke(other.transform);
         }
-        else  OnPlayerLost?.Invoke();
+        else  OnPlayerLost?.Invoke(other.transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            OnPlayerLost?.Invoke();
+            OnPlayerLost?.Invoke(other.transform);
         }
     }
 }
