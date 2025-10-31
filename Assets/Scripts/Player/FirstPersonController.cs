@@ -1,11 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
+    private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int Death = Animator.StringToHash("Death");
+    [SerializeField] private Animator animator;
+    [SerializeField] private CinemachineInputAxisController cinnemachineInput;
+
     [Header("Movement")] 
     [SerializeField] private float movementSpeed;
     [SerializeField] private float gravity;
@@ -21,7 +27,7 @@ public class FirstPersonController : MonoBehaviour
     private Camera camera;
     private bool isGrounded;
     private Vector2 movementInput;
-
+    
     void Start()
     {
         ch_Controller = GetComponent<CharacterController>();
@@ -80,6 +86,8 @@ public class FirstPersonController : MonoBehaviour
             
             ch_Controller.Move(movementVector * movementSpeed * Time.deltaTime); //Aplica el movimiento.
         }
+        
+        animator.SetFloat(Speed, ch_Controller.velocity.magnitude);
     }
 
     private void Jump()
@@ -90,9 +98,21 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    public void OnDeath()
+    {
+        animator.SetTrigger(Death);
+        this.enabled = false;
+        cinnemachineInput.enabled = false;
+    }
+
     private void OnDisable()
     {
         InputController.Instance.OnJump -=  Jump;
         InputController.Instance.OnMove -=  UpdateMovement;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(feet.position, detectionRadius);
     }
 }

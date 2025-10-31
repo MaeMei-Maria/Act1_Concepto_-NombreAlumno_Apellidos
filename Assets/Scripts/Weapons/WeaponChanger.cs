@@ -19,6 +19,12 @@ public class WeaponChanger : MonoBehaviour
     {
         InputController.Instance.OnScroll += ChangeWeaponWScroll;
         InputController.Instance.OnNewWeapon += ChangeWeaponWNum;
+        InputController.Instance.OnUseWeapon += WeaponUsed;
+    }
+
+    private void WeaponUsed()
+    {
+        currentWeapon.OnUse();
     }
 
     private void ChangeWeaponWNum(int index)
@@ -52,5 +58,6 @@ public class WeaponChanger : MonoBehaviour
     {
         InputController.Instance.OnScroll -= ChangeWeaponWScroll;
         InputController.Instance.OnNewWeapon -= ChangeWeaponWNum;
+        InputController.Instance.OnUseWeapon -= WeaponUsed;
     }
 }

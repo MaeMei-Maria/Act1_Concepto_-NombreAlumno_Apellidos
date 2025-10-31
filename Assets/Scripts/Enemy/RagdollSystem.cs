@@ -13,7 +13,7 @@ public class RagdollSystem : MonoBehaviour
         UpdateBonesState(true);
     }
 
-    private void UpdateBonesState(bool state)
+    public void UpdateBonesState(bool state)
     {
         foreach (var bone in  bones)
         {

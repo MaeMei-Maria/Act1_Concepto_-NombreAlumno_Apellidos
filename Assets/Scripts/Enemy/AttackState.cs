@@ -1,3 +1,4 @@
+using DG.Tweening;
 using FSM.Enemy;
 using UnityEngine;
 
@@ -6,6 +7,10 @@ public class AttackState : States<EnemyController>
     private static readonly int Attacking = Animator.StringToHash("attacking");
 
     [SerializeField] private float attackDistance = 2.5f;
+    [SerializeField] private float smoothGaze = 2f;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRadius = 1f;
+    [SerializeField] private int damage = 15;
     public override void OnEnter()
     {
         
@@ -16,11 +21,7 @@ public class AttackState : States<EnemyController>
         _controller.Agent.isStopped = true;
         _controller.Animator.SetBool(Attacking, true);
         
-        //Rotamos al enemigo para que vea hacia el player cuando lo esté atacando.
-        Vector3 directionToTarget = (_controller.Target.position - transform.position).normalized;
-        directionToTarget.y = 0; //Evitamos que se vuelque.
-        Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
-        transform.rotation = lookRotation;
+        transform.DOLookAt(_controller.Target.transform.position, smoothGaze, AxisConstraint.Y);
     }
 
     private void AttackFinished() //Se llama mediante un evento de animación y comprueba la distancia al finalizar el ataque
@@ -30,6 +31,19 @@ public class AttackState : States<EnemyController>
             _controller.Animator.SetBool(Attacking, false);
             _controller.Agent.isStopped = false;
             _controller.SetState(_controller.ChaseState);
+        }
+    }
+
+    private void OnAttack()
+    {
+        Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius);
+
+        foreach (Collider coll in colliders)
+        {
+            if(coll.TryGetComponent(out PlayerHealthSystem playerHealth))
+            {
+                playerHealth.TakeDamage(damage);
+            }
         }
     }
     

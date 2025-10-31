@@ -6,6 +6,7 @@ public class InputController : MonoBehaviour
 {
     public static InputController Instance { get; private set; }
     public event Action OnJump;
+    public event Action OnUseWeapon;
     public event Action<Vector2> OnMove;
     public event Action<float> OnScroll;
     public event Action<int> OnNewWeapon;
@@ -34,6 +35,12 @@ public class InputController : MonoBehaviour
         playerInput.actions["ChangeWeapon"].performed += OnScrollWeapon;
         playerInput.actions["Weapon1"].started += OnWeapon1;
         playerInput.actions["Weapon2"].started += OnWeapon2;
+        playerInput.actions["UseWeapon"].started += UsingWeapon;
+    }
+
+    private void UsingWeapon(InputAction.CallbackContext obj)
+    {
+        OnUseWeapon?.Invoke();
     }
 
     private void OnWeapon1(InputAction.CallbackContext ctx)
