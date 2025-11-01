@@ -10,6 +10,8 @@ public class InputController : MonoBehaviour
     public event Action<Vector2> OnMove;
     public event Action<float> OnScroll;
     public event Action<int> OnNewWeapon;
+
+    public event Action OnInteract;
     
     private PlayerInput playerInput;
     
@@ -36,8 +38,9 @@ public class InputController : MonoBehaviour
         playerInput.actions["Weapon1"].started += OnWeapon1;
         playerInput.actions["Weapon2"].started += OnWeapon2;
         playerInput.actions["UseWeapon"].started += UsingWeapon;
+        playerInput.actions["Interact"].started += OnInteraction;
     }
-
+    
     private void UsingWeapon(InputAction.CallbackContext obj)
     {
         OnUseWeapon?.Invoke();
@@ -62,6 +65,7 @@ public class InputController : MonoBehaviour
     {
         OnMove?.Invoke(ctx.ReadValue<Vector2>());
     }
+    
     private void OnMoveCanceled(InputAction.CallbackContext obj)
     {
         OnMove?.Invoke(Vector2.zero);
@@ -72,6 +76,11 @@ public class InputController : MonoBehaviour
         OnJump?.Invoke();
     }
 
+    private void OnInteraction(InputAction.CallbackContext obj)
+    {
+        OnInteract?.Invoke();
+    }
+
     private void OnDisable()
     {
         playerInput.actions["Jump"].started -= OnJumpStarted;
@@ -80,5 +89,6 @@ public class InputController : MonoBehaviour
         playerInput.actions["ChangeWeapon"].performed -= OnScrollWeapon;
         playerInput.actions["Weapon1"].started -= OnWeapon1;
         playerInput.actions["Weapon2"].started -= OnWeapon2;
+        playerInput.actions["Interact"].started -= OnInteraction;
     }
 }
