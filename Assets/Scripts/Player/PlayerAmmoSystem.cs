@@ -1,20 +1,32 @@
+using System;
 using UnityEngine;
 
 public class PlayerAmmoSystem : MonoBehaviour
 {
     [SerializeField] private EventManagerSO _eventManagerSo;
-    [SerializeField] private FirstPersonController _playerController;
     [SerializeField] private float maxAmmoGun = 50f;
     [SerializeField] private float maxAmmCluster = 5f;
 
-    private float currentAmmoGun;
-    private float currentAmmCluster;
+    public float currentAmmoGun;
+    public float currentAmmCluster;
+    
+    public float MaxAmmoGun { get; private set; }
+    public float MaxAmmoCluster { get; private set; }
 
     private void Awake()
     {
-        _playerController = GetComponent<FirstPersonController>();
+        MaxAmmoCluster = maxAmmCluster;
+        MaxAmmoGun = maxAmmoGun;
+        
         currentAmmoGun = maxAmmoGun;
         currentAmmCluster = maxAmmCluster;
+    }
+
+    private void Start()
+    {
+        // Avisar a la UI cuánta munición hay al inicio
+        _eventManagerSo.PlayerUseGunAmmo(currentAmmoGun, maxAmmoGun);
+        _eventManagerSo.PlayerUseGrenadeAmmo(currentAmmCluster, maxAmmCluster);
     }
 
     public void DecreaseAmmoGun(float lostAmmo)
@@ -29,10 +41,10 @@ public class PlayerAmmoSystem : MonoBehaviour
     public void DecreaseAmmoCluster(float lostAmmo)
     {
         currentAmmCluster -= lostAmmo;
-        _eventManagerSo.PlayerUseGrenadeAmmo(currentAmmCluster, currentAmmCluster);
+        _eventManagerSo.PlayerUseGrenadeAmmo(currentAmmCluster, maxAmmCluster);
 
         if (!(currentAmmoGun <= 0)) return;
-        currentAmmoGun = 0;
+        currentAmmCluster = 0;
     }
     
     public void GetGunAmmo(float ammoAmount)

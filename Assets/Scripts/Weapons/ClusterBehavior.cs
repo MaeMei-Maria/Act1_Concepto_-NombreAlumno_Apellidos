@@ -12,6 +12,7 @@ public class ClusterBehavior : Weapon
     private void Awake()
     {
         grenadePool = new ObjectPool<Grenade>(OnCreateGrenade, OnGetGrenade, OnReleaseGrenade);
+        playerAmmoSystem = GetComponentInParent<PlayerAmmoSystem>();
     }
 
     private Grenade OnCreateGrenade() //Genera nuevas granadas cuando no hay disponibles.
@@ -36,6 +37,9 @@ public class ClusterBehavior : Weapon
 
     public override void OnUse()
     {
+        if (playerAmmoSystem.currentAmmCluster <= 0) return;
+        
+        playerAmmoSystem.DecreaseAmmoCluster(1); //Resta una granada al sistema de munición al usar el lanzagranadas.
         grenadePool.Get();
     }
 }
