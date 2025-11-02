@@ -12,7 +12,7 @@ public class PlayerInteractionSystem : MonoBehaviour
 
     private void LaunchInteraction() //Interacción con el objeto actual
     {
-        currentInteractable?.Interact();
+        currentInteractable?.Interact(gameObject);
         currentInteractable?.OnInteractableDeactivated();
         currentInteractable = null;
     }

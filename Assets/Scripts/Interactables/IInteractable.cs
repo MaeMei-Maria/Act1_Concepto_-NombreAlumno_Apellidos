@@ -4,5 +4,5 @@ public interface IInteractable
 {
     void OnInteractableActivated();
     void OnInteractableDeactivated();
-    void Interact();
+    void Interact(GameObject interactor);
 }

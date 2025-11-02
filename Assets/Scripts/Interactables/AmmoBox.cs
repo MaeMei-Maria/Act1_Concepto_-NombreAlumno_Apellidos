@@ -15,7 +15,7 @@ public class AmmoBox : MonoBehaviour, IInteractable
         interactionIcon.SetActive(false);
     }
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
         gameObject.SetActive(false);
     }

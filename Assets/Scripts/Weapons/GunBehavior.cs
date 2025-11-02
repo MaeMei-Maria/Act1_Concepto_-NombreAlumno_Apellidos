@@ -15,8 +15,7 @@ public class GunBehavior : Weapon
 
     public override void OnUse()
     {
-        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hitInfo,
-                damageDistance))
+        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out RaycastHit hitInfo, damageDistance))
         {
             if (hitInfo.transform.TryGetComponent(out EnemyBones enemyBone))
             {

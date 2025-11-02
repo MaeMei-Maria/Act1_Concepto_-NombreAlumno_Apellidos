@@ -3,7 +3,7 @@ using UnityEngine;
 public class MedicalKit : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject interactionIcon;
-    [SerializeField] private int healthAmount;
+    [SerializeField] private float healthAmount = 15f;
 
     public void OnInteractableActivated()
     {
@@ -15,8 +15,13 @@ public class MedicalKit : MonoBehaviour, IInteractable
         interactionIcon.SetActive(false);
     }
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
+        if (interactor.GetComponentInParent<PlayerHealthSystem>())
+        {
+            Debug.Log("Interact with PlayerHealthSystem");   
+        }
+        
         gameObject.SetActive(false);
     }
 }
