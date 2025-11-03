@@ -17,9 +17,12 @@ public class MedicalKit : MonoBehaviour, IInteractable
 
     public void Interact(GameObject interactor)
     {
-        if (interactor.GetComponentInParent<PlayerHealthSystem>())
+        PlayerHealthSystem playerHealthSystem = interactor.GetComponentInParent<PlayerHealthSystem>();
+        
+        if (playerHealthSystem != null)
         {
             Debug.Log("Interact with PlayerHealthSystem");   
+            playerHealthSystem.Heal(healthAmount);
         }
         
         gameObject.SetActive(false);
