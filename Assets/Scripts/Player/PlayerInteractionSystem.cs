@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInteractionSystem : MonoBehaviour
 {
     private IInteractable currentInteractable;
-
+    
     private void OnEnable()
     {
         InputController.Instance.OnInteract += LaunchInteraction;
