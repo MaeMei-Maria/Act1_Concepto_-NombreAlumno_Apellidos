@@ -1090,8 +1090,8 @@ Transform:
   m_GameObject: {fileID: 805148779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.41, y: 0.9, z: -2.87}
-  m_LocalScale: {x: 1, y: 7.25, z: 14.9}
+  m_LocalPosition: {x: 3.41, y: 1.08, z: -2.87}
+  m_LocalScale: {x: 1, y: 2.33, z: 14.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1845,6 +1845,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _eventManagerSo: {fileID: 11400000, guid: e6be14773093fb9439f281d4b0fe38fd, type: 2}
   healthBar: {fileID: 1052331142}
+--- !u!1 &1404907743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1236043543042646456, guid: 0cddea0d8c77b1148b8d2c7d065baca8, type: 3}
+  m_PrefabInstance: {fileID: 8123840234475669318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1434350627 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2120494508095320788, guid: 3666a9b2859e8c442bcfc1e782d3ea08, type: 3}
@@ -2502,7 +2507,7 @@ GameObject:
   - component: {fileID: 5866666021215561533}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4140,7 +4145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Sensor>k__BackingField: {fileID: 506349189}
-  _ragdollSystem: {fileID: 0}
+  _ragdollSystem: {fileID: 5866666021215561536}
   maxHealth: 100
   timeToDestroy: 4.5
 --- !u!195 &5866666021215561538
@@ -4324,6 +4329,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyController: {fileID: 0}
   damageMultiplier: 0
+--- !u!1001 &6073402517229905547
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 523779688501240684, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: interactionIcon
+      value: 
+      objectReference: {fileID: 1404907743}
+    - target: {fileID: 1436597019720658521, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_Name
+      value: Grenade_AmmoBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447962578992787863, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 231d7ba686eb0eb44839f69ef86d7b60, type: 3}
 --- !u!1 &6136935970280828454
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,6 +4617,18 @@ PrefabInstance:
     - target: {fileID: 2120494508095320788, guid: 3666a9b2859e8c442bcfc1e782d3ea08, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132895033009272795, guid: 3666a9b2859e8c442bcfc1e782d3ea08, type: 3}
+      propertyPath: maxAmmCluster
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918179225667681810, guid: 3666a9b2859e8c442bcfc1e782d3ea08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918179225667895926, guid: 3666a9b2859e8c442bcfc1e782d3ea08, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.202
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5153,17 +5231,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 954983619239687022, guid: 0cddea0d8c77b1148b8d2c7d065baca8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3513036837753317837, guid: 0cddea0d8c77b1148b8d2c7d065baca8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.71
       objectReference: {fileID: 0}
     - target: {fileID: 3513036837753317837, guid: 0cddea0d8c77b1148b8d2c7d065baca8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.195
+      value: 0.884
       objectReference: {fileID: 0}
     - target: {fileID: 3513036837753317837, guid: 0cddea0d8c77b1148b8d2c7d065baca8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5878,3 +5952,4 @@ SceneRoots:
   - {fileID: 6759784686301475189}
   - {fileID: 1690893699}
   - {fileID: 637413058}
+  - {fileID: 6073402517229905547}

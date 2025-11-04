@@ -25,7 +25,8 @@ namespace FSM.Enemy
         {
             Agent = GetComponent<NavMeshAgent>();
             Animator = GetComponent<Animator>();
-
+            _ragdollSystem =  GetComponent<RagdollSystem>();
+            
             PatrolState = GetComponent<PatrolState>();
             ChaseState = GetComponent<ChaseState>();
             AttackState = GetComponent<AttackState>();

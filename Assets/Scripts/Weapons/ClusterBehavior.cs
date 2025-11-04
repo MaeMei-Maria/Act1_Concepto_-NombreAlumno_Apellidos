@@ -28,6 +28,8 @@ public class ClusterBehavior : Weapon
         newGrenade.transform.position = spawnPoint.position;
         newGrenade.transform.rotation = spawnPoint.rotation;
         newGrenade.gameObject.SetActive(true);
+        
+        newGrenade.Launch(spawnPoint.forward);
     }
     
     private void OnReleaseGrenade(Grenade grenadeToRelease) //Para desactivar las granadas
