@@ -4,13 +4,16 @@ using UnityEngine.Pool;
 
 public class ClusterBehavior : Weapon
 {
+    [SerializeField] private ParticlesBehavior shootParticlesPrefab;
     [SerializeField] private Grenade grenadePrefab;
     [SerializeField] private Transform spawnPoint;
     
+    private ObjectPool<ParticlesBehavior> shootParticlesPool;
     private ObjectPool<Grenade> grenadePool;
 
     private void Awake()
     {
+        shootParticlesPool = new ObjectPool<ParticlesBehavior>(OnCreateParticles, OnGetParticles, OnReleaseParticles);
         grenadePool = new ObjectPool<Grenade>(OnCreateGrenade, OnGetGrenade, OnReleaseGrenade);
         playerAmmoSystem = GetComponentInParent<PlayerAmmoSystem>();
     }
@@ -39,9 +42,32 @@ public class ClusterBehavior : Weapon
 
     public override void OnUse()
     {
-        if (playerAmmoSystem.currentAmmCluster <= 0) return;
+        if (playerAmmoSystem.CurrentAmmoCluster <= 0) return;
         
-        playerAmmoSystem.DecreaseAmmoCluster(1); //Resta una granada al sistema de munición al usar el lanzagranadas.
+        playerAmmoSystem.DecreaseClusterAmmo(1); //Resta una granada al sistema de munición al usar el lanzagranadas.
         grenadePool.Get();
+        shootParticlesPool.Get();
+    }
+    
+    // ------------- PARTICLES ------------- //
+
+    private ParticlesBehavior OnCreateParticles()
+    {
+        ParticlesBehavior particlesCopy = Instantiate(shootParticlesPrefab, spawnPoint.position, spawnPoint.rotation);
+        particlesCopy.ParticlesPool = shootParticlesPool;
+        return particlesCopy;
+    }
+
+    private void OnGetParticles(ParticlesBehavior newParticles)
+    {
+        // Alinear con el spawn del arma
+        newParticles.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+        newParticles.gameObject.SetActive(true);
+        newParticles.StartParticlesSystem();
+    }
+
+    private void OnReleaseParticles(ParticlesBehavior grenadeParticles)
+    {
+        grenadeParticles.gameObject.SetActive(false);
     }
 }

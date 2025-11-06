@@ -18,7 +18,7 @@ public class AmmoBarManager : MonoBehaviour
         _eventManagerSo.OnAmmoGunGetted += UpdateGunAmmoBar;
         
         _eventManagerSo.OnPlayerUseGrenade += UpdateClusterAmmoBar;
-        _eventManagerSo.OnAmmoGunGetted += UpdateClusterAmmoBar;
+        _eventManagerSo.OnAmmoGrenadeGetted += UpdateClusterAmmoBar;
     }
 
     private void UpdateClusterAmmoBar(float currentAmmo, float maxAmmo)
@@ -39,7 +39,7 @@ public class AmmoBarManager : MonoBehaviour
         _eventManagerSo.OnAmmoGunGetted -= UpdateGunAmmoBar;
         
         _eventManagerSo.OnPlayerUseGrenade -= UpdateClusterAmmoBar;
-        _eventManagerSo.OnAmmoGunGetted -= UpdateClusterAmmoBar;
+        _eventManagerSo.OnAmmoGrenadeGetted -= UpdateClusterAmmoBar;
     }
 }
 

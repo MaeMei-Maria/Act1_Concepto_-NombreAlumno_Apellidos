@@ -1,30 +1,17 @@
 using UnityEngine;
 
-public class MedicalKit : MonoBehaviour, IInteractable
+public class MedicalKit : Interactables
 {
-    [SerializeField] private GameObject interactionIcon;
-    [SerializeField] private float healthAmount = 15f;
+    [SerializeField] private float healAmount = 15f;
 
-    public void OnInteractableActivated()
+    public override void Interact(GameObject interactor)
     {
-        interactionIcon.SetActive(true);
-    }
-
-    public void OnInteractableDeactivated()
-    {
-        interactionIcon.SetActive(false);
-    }
-
-    public void Interact(GameObject interactor)
-    {
-        PlayerHealthSystem playerHealthSystem = interactor.GetComponentInParent<PlayerHealthSystem>();
-        
-        if (playerHealthSystem != null)
+        var main = interactor.GetComponentInParent<PlayerMain>();
+        if (main != null)
         {
-            Debug.Log("Interact with PlayerHealthSystem");   
-            playerHealthSystem.Heal(healthAmount);
+            main.NotifyHealed(healAmount);
         }
-        
+
         gameObject.SetActive(false);
     }
 }

@@ -7,6 +7,10 @@ public class Grenade : MonoBehaviour
 {
     public ObjectPool<Grenade> GrenadePool {get; set;}
 
+    private ObjectPool<ParticlesBehavior> grenadeParticlesPool;
+    
+    [SerializeField] private ParticlesBehavior grenadeParticlesPrefab;
+
     [Header("Move/Time")]
     [SerializeField] private float impulseForce = 30f;
     [SerializeField] private float timeToRelease = 5f;
@@ -23,6 +27,7 @@ public class Grenade : MonoBehaviour
 
     private void Awake()
     {
+       grenadeParticlesPool = new ObjectPool<ParticlesBehavior>(OnCreateParticles, OnGetParticles, OnReleaseParticles);
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -55,16 +60,35 @@ public class Grenade : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
         }
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
+        //Hacer aparecer las partículas en la posición y rotación de la granada
+        var explosion = grenadeParticlesPool.Get();
+        explosion.transform.position = transform.position;
+        explosion.transform.rotation = Quaternion.identity;
     }
     
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
+    }
+    
+    //--------------------PARTICLES----------------------//
+    private ParticlesBehavior OnCreateParticles()
+    {
+        ParticlesBehavior particlesCopy = Instantiate(grenadeParticlesPrefab);
+        particlesCopy.ParticlesPool = grenadeParticlesPool;
+        return particlesCopy;
+    }
+
+    private void OnGetParticles(ParticlesBehavior newParticles)
+    {
+        newParticles.gameObject.SetActive(true);
+        newParticles.StartParticlesSystem();
+    }
+
+    private void OnReleaseParticles(ParticlesBehavior grenadeParticles)
+    {
+        grenadeParticles.gameObject.SetActive(false);
     }
 }

@@ -53,6 +53,9 @@ public class PatrolState : States<EnemyController>
     {
         while (true)
         {
+            //Nos aseguramos de que el agente esté activo o sobre el navmesh para evitar errores.
+            if(_controller.Agent == null || !_controller.Agent.isOnNavMesh) yield break; 
+            
             _controller.Agent.SetDestination(patrolPoints[currentPatrolIndex]);
             yield return new WaitUntil(() => !_controller.Agent.pathPending && _controller.Agent.remainingDistance <= _controller.Agent.stoppingDistance);
             yield return new WaitForSeconds(waitTime);
@@ -73,6 +76,7 @@ public class PatrolState : States<EnemyController>
 
     public override void OnExit()
     {
+        StopAllCoroutines();
     }
 
     private void OnDisable()

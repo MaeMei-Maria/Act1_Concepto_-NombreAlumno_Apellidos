@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionIcon: {fileID: 1236043543042646456}
   ammoBoxAmount: 20
+  eventManager: {fileID: 11400000, guid: e6be14773093fb9439f281d4b0fe38fd, type: 2}
 --- !u!65 &8807021108088791100
 BoxCollider:
   m_ObjectHideFlags: 0

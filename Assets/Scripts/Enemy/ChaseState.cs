@@ -44,7 +44,9 @@ public class ChaseState : States<EnemyController>
         }
         else
         {
-            _controller.SetState(_controller.AttackState);
+            // Está dentro del rango de ataque → pasamos al ataque correcto
+            _controller.Agent.isStopped = true;
+            _controller.ChangeToAttackState();
         }
     }
 

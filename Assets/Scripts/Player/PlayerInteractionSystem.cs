@@ -19,10 +19,8 @@ public class PlayerInteractionSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //Actualización del interactuador actual.
     {
-        Debug.Log("Encontró interactuable: ");
         if (other.TryGetComponent(out IInteractable interactable))
         {
-            Debug.Log("Encontró interactuable: " + interactable);
             if (interactable != currentInteractable)
             {
                 currentInteractable?.OnInteractableDeactivated();

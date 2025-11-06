@@ -1,71 +1,50 @@
-using System;
 using UnityEngine;
 
 public class PlayerAmmoSystem : MonoBehaviour
 {
-    [SerializeField] private EventManagerSO _eventManagerSo;
-    [SerializeField] private float maxAmmoGun = 50f;
-    [SerializeField] private float maxAmmCluster = 5f;
+    [SerializeField] private EventManagerSO eventManager;
 
-    public float currentAmmoGun;
-    public float currentAmmCluster;
-    
-    public float MaxAmmoGun { get; private set; }
-    public float MaxAmmoCluster { get; private set; }
+    [Header("Ammo Settings")]
+    [SerializeField] private float maxAmmoGun = 50f;
+    [SerializeField] private float maxAmmoCluster = 5f;
+
+    public float CurrentAmmoGun { get; private set; }
+    public float CurrentAmmoCluster { get; private set; }
 
     private void Awake()
     {
-        MaxAmmoCluster = maxAmmCluster;
-        MaxAmmoGun = maxAmmoGun;
-        
-        currentAmmoGun = maxAmmoGun;
-        currentAmmCluster = maxAmmCluster;
+        CurrentAmmoGun = maxAmmoGun;
+        CurrentAmmoCluster = maxAmmoCluster;
     }
 
     private void Start()
     {
-        // Avisar a la UI cuánta munición hay al inicio
-        _eventManagerSo.PlayerUseGunAmmo(currentAmmoGun, maxAmmoGun);
-        _eventManagerSo.PlayerUseGrenadeAmmo(currentAmmCluster, maxAmmCluster);
+        // Actualizar UI al inicio
+        eventManager.PlayerUseGunAmmo(CurrentAmmoGun, maxAmmoGun);
+        eventManager.PlayerUseGrenadeAmmo(CurrentAmmoCluster, maxAmmoCluster);
     }
 
-    public void DecreaseAmmoGun(float lostAmmo)
+    public void AddGunAmmo(float amount)
     {
-        currentAmmoGun -= lostAmmo;
-        _eventManagerSo.PlayerUseGunAmmo(currentAmmoGun, maxAmmoGun);
-
-        if (!(currentAmmoGun <= 0)) return;
-        currentAmmoGun = 0;
-    }
-    
-    public void DecreaseAmmoCluster(float lostAmmo)
-    {
-        currentAmmCluster -= lostAmmo;
-        _eventManagerSo.PlayerUseGrenadeAmmo(currentAmmCluster, maxAmmCluster);
-
-        if (!(currentAmmoGun <= 0)) return;
-        currentAmmCluster = 0;
-    }
-    
-    public void GetGunAmmo(float ammoAmount)
-    {
-        currentAmmoGun += ammoAmount;
-        
-        if (currentAmmoGun >= maxAmmoGun)
-        {
-            currentAmmoGun = maxAmmoGun;
-        }
-        _eventManagerSo.AmmoGunGetted(currentAmmoGun, maxAmmoGun);
+        CurrentAmmoGun = Mathf.Min(CurrentAmmoGun + amount, maxAmmoGun);
+        eventManager.AmmoGunGetted(CurrentAmmoGun, maxAmmoGun);
     }
 
-    public void GetClusterAmmo(float ammoAmount)
+    public void AddClusterAmmo(float amount)
     {
-        currentAmmCluster += ammoAmount;
+        CurrentAmmoCluster = Mathf.Min(CurrentAmmoCluster + amount, maxAmmoCluster);
+        eventManager.AmmoGrenadeGetted(CurrentAmmoCluster, maxAmmoCluster);
+    }
 
-        if (currentAmmCluster >= maxAmmCluster)
-        {
-            currentAmmCluster = maxAmmCluster;
-        }
-        _eventManagerSo.AmmoGrenadeGetted(currentAmmCluster, maxAmmCluster);
+    public void DecreaseGunAmmo(float amount)
+    {
+        CurrentAmmoGun = Mathf.Max(CurrentAmmoGun - amount, 0);
+        eventManager.PlayerUseGunAmmo(CurrentAmmoGun, maxAmmoGun);
+    }
+
+    public void DecreaseClusterAmmo(float amount)
+    {
+        CurrentAmmoCluster = Mathf.Max(CurrentAmmoCluster - amount, 0);
+        eventManager.PlayerUseGrenadeAmmo(CurrentAmmoCluster, maxAmmoCluster);
     }
 }

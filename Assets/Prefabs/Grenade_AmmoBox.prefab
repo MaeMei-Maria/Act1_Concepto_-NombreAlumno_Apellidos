@@ -2508,7 +2508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6447962578992787863}
   - component: {fileID: 7523778410400061608}
-  - component: {fileID: 523779688501240684}
+  - component: {fileID: 8926738234649251042}
   m_Layer: 0
   m_Name: Grenade_AmmoBox
   m_TagString: Untagged
@@ -2553,7 +2553,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.8, z: 1}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &523779688501240684
+--- !u!114 &8926738234649251042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2562,11 +2562,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1436597019720658521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48ca740d52ed7a844bab476986c17f5e, type: 3}
+  m_Script: {fileID: 11500000, guid: 479d9d8881cef684f8e6cdaaace2f8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionIcon: {fileID: 0}
+  interactionIcon: {fileID: 4096028472480892028}
   ammoBoxAmount: 3
+  eventManager: {fileID: 11400000, guid: e6be14773093fb9439f281d4b0fe38fd, type: 2}
 --- !u!1 &1504761143091662351
 GameObject:
   m_ObjectHideFlags: 0
