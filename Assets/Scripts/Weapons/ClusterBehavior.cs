@@ -7,7 +7,8 @@ public class ClusterBehavior : Weapon
     [SerializeField] private ParticlesBehavior shootParticlesPrefab;
     [SerializeField] private Grenade grenadePrefab;
     [SerializeField] private Transform spawnPoint;
-    
+    [SerializeField] private AudioClip shot;
+
     private ObjectPool<ParticlesBehavior> shootParticlesPool;
     private ObjectPool<Grenade> grenadePool;
 
@@ -44,6 +45,7 @@ public class ClusterBehavior : Weapon
     {
         if (playerAmmoSystem.CurrentAmmoCluster <= 0) return;
         
+        AudioManager.Instance.PlaySFX(shot);
         playerAmmoSystem.DecreaseClusterAmmo(1); //Resta una granada al sistema de munición al usar el lanzagranadas.
         grenadePool.Get();
         shootParticlesPool.Get();

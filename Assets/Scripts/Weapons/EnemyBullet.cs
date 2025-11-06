@@ -1,60 +1,87 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public ObjectPool<EnemyBullet> BulletPool {get; set;}
+    public ObjectPool<EnemyBullet> BulletPool { get; set; }
 
-    [Header("Movement")] 
+    [Header("Movement")]
     [SerializeField] private float bulletSpeed = 100f;
     [SerializeField] private float bulletLifeTime = 3f;
-    
+
     [Header("Damage")]
     [SerializeField] private float bulletDamage = 20f;
-    
+
+    public TrailRenderer trailRenderer { get; private set; }
+
     private Rigidbody rigidbodyBullet;
-    private bool isActive;
+    private Coroutine lifeCoroutine;
+
+    public bool IsActive { get; private set; } = false;
 
     private void Awake()
     {
         rigidbodyBullet = GetComponent<Rigidbody>();
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void OnEnable()
     {
-        isActive = true;
-        StartCoroutine(ReleaseAfterTime());
-    }
-    
-    public void Shoot(Vector3 direction)
-    {
+        IsActive = true;
+
+        trailRenderer?.Clear();
         rigidbodyBullet.linearVelocity = Vector3.zero;
         rigidbodyBullet.angularVelocity = Vector3.zero;
-
-        rigidbodyBullet.AddForce(direction.normalized * bulletSpeed, ForceMode.VelocityChange);
     }
 
-    private IEnumerator ReleaseAfterTime()
+    private void OnDisable()
     {
-        yield return new WaitForSeconds(bulletLifeTime);
-
-        if (isActive)
+        if (lifeCoroutine != null)
         {
-            BulletPool.Release(this);
+            StopCoroutine(lifeCoroutine);
+            lifeCoroutine = null;
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    public void Shoot(Vector3 direction)
     {
-        isActive = false;
+        if (!IsActive) return;
 
-        if (other.transform.TryGetComponent(out PlayerHealthSystem playerHealthSystem))
+        // Reiniciamos física y efectos
+        rigidbodyBullet.linearVelocity = Vector3.zero;
+        rigidbodyBullet.angularVelocity = Vector3.zero;
+        trailRenderer?.Clear();
+
+        rigidbodyBullet.AddForce(direction.normalized * bulletSpeed, ForceMode.VelocityChange);
+
+        // Corutina para liberar automáticamente
+        lifeCoroutine = StartCoroutine(AutoRelease());
+    }
+
+    private IEnumerator AutoRelease()
+    {
+        yield return new WaitForSeconds(bulletLifeTime);
+        ReleasePool();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!IsActive) return;
+        
+        if (other.TryGetComponent<PlayerHealthSystem>(out var playerHealthSystem))
         {
             playerHealthSystem.TakeDamage(bulletDamage);
         }
-        
-        BulletPool.Release(this);
+
+        ReleasePool();
+    }
+
+    public void ReleasePool()
+    {
+        if (!IsActive) return;
+
+        IsActive = false;
+        BulletPool?.Release(this);
     }
 }

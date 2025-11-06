@@ -2,7 +2,7 @@ using DG.Tweening;
 using FSM.Enemy;
 using UnityEngine;
 
-public class AttackState : States<EnemyController>
+public class AttackState : States<EnemyController>, IEnemyAttack
 {
     private static readonly int Attacking = Animator.StringToHash("attacking");
 
@@ -24,6 +24,11 @@ public class AttackState : States<EnemyController>
         transform.DOLookAt(_controller.Target.transform.position, smoothGaze, AxisConstraint.Y);
     }
 
+    public void OnAttack(Transform target)
+    {
+        
+    }
+    
     private void AttackFinished() //Se llama mediante un evento de animación y comprueba la distancia al finalizar el ataque
     {
         if (Vector3.Distance(transform.position, _controller.Target.position) > attackDistance)

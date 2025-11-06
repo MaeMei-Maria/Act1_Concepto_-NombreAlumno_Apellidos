@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: ece3c2604a9b5424691e31d27837d6b8
+  - enabled: 1
+    path: Assets/Scenes/SciFi_Warehouse.unity
+    guid: 04ba57353b4f0284686265d3d150c23c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e0793e3b22c0784c95a197c7b6631b0, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 09c6c6bcd35b7f14199742acd0d8e10e, type: 3}

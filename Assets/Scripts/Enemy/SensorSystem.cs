@@ -22,8 +22,6 @@ public class SensorSystem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player Detectado");
-
             CheckDetection(other);
         }
     }
@@ -38,7 +36,6 @@ public class SensorSystem : MonoBehaviour
         //Revisa el ángulo de visión
         if (Vector3.Angle(directionToTarget, transform.forward) < sensorAngle / 2f)
         {
-            Debug.Log("Player en rango");
             OnPlayerDetected?.Invoke(other.transform);
         }
         else  OnPlayerLost?.Invoke(other.transform);

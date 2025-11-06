@@ -3,7 +3,7 @@ using FSM.Enemy;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ShootAttackState : States<EnemyController>
+public class ShootAttackState : States<EnemyController>, IEnemyAttack
 {
     private static readonly int Attacking = Animator.StringToHash("attacking");
 
@@ -13,7 +13,9 @@ public class ShootAttackState : States<EnemyController>
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject gunGameObject;
     [SerializeField] private EnemyBullet bulletPrefab;
-
+    [SerializeField] private float offSet = 10f;
+    [SerializeField] private AudioClip shot;
+    
     private ObjectPool<EnemyBullet> bulletPool;
 
     public override void OnEnter()
@@ -25,11 +27,17 @@ public class ShootAttackState : States<EnemyController>
         bulletPool ??= new ObjectPool<EnemyBullet>(OnCreateBullet, OnGetBullet, OnReleaseBullet);
     }
 
-    public override void OnUpdate()
+    public void OnAttack(Transform target)
     {
-        transform.DOLookAt(_controller.Target.transform.position, smoothGaze, AxisConstraint.Y);
+        
     }
     
+    public override void OnUpdate()
+    {
+        Vector3 lookTarget = _controller.Target.position + Vector3.right * offSet;
+        transform.DOLookAt(lookTarget, smoothGaze, AxisConstraint.Y);
+    }
+
     private EnemyBullet OnCreateBullet()
     {
         EnemyBullet bullet = Instantiate(bulletPrefab);
@@ -40,24 +48,43 @@ public class ShootAttackState : States<EnemyController>
     private void OnGetBullet(EnemyBullet bullet)
     {
         bullet.gameObject.SetActive(true);
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
+
+        // Reiniciamos física y trail por si acaso
+        var rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        bullet.trailRenderer?.Clear();
     }
 
     private void OnReleaseBullet(EnemyBullet bullet)
     {
+        var rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.Sleep();
+
         bullet.gameObject.SetActive(false);
     }
-    
+
+    // Método que dispara la bala
     private void OnShootAttack()
     {
         var bullet = bulletPool.Get();
-        bullet.transform.position = firePoint.position;
-        bullet.transform.rotation = firePoint.rotation;
-        bullet.Shoot(firePoint.forward);
+        AudioManager.Instance.PlaySFX(shot);
+        Vector3 targetDirection = (_controller.Target.position - firePoint.position).normalized;
+        
+        if (!bullet.IsActive)
+        {
+            return;
+        }
+        
+        bullet.Shoot(targetDirection);
     }
 
-    private void ShootAttackFinished() //Se llama mediante un evento de animación y comprueba la distancia al finalizar el ataque
+    private void ShootAttackFinished()
     {
-        // Comprobar si el jugador está fuera del rango
         float distance = Vector3.Distance(_controller.transform.position, _controller.Target.position);
         if (distance > attackDistance)
         {
@@ -65,10 +92,11 @@ public class ShootAttackState : States<EnemyController>
             _controller.SetState(_controller.ChaseState);
         }
     }
-    
+
     public override void OnExit()
     {
         _controller.Animator.SetBool(Attacking, false);
         gunGameObject.SetActive(false);
     }
+    
 }
