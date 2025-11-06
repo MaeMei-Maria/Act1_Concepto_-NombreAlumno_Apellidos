@@ -3,7 +3,6 @@ using UnityEngine;
 public class MedicalKit : Interactables
 {
     [SerializeField] private float healAmount = 15f;
-    [SerializeField] private AudioClip medicalKitClip;
     
     public override void Interact(GameObject interactor)
     {
@@ -13,7 +12,7 @@ public class MedicalKit : Interactables
             main.NotifyHealed(healAmount);
         }
 
-        AudioManager.Instance.PlaySFX(medicalKitClip);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.medicalKitSfx);
         gameObject.SetActive(false);
     }
 }

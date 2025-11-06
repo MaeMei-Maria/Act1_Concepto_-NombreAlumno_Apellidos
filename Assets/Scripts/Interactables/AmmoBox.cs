@@ -12,7 +12,7 @@ public class AmmoBox : Interactables
             main.NotifyAmmoGunCollected(ammoBoxAmount);
         }
         
-        AudioManager.Instance.PlaySFX(reloadAmmoClip);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.ammoBoxSfx);
         gameObject.SetActive(false);
     }
 }

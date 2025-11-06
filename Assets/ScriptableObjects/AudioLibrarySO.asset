@@ -20,5 +20,6 @@ MonoBehaviour:
   grenadeSfx: {fileID: 8300000, guid: 2ad8f419de8272446a3bb717cdfc1265, type: 3}
   ammoBoxSfx: {fileID: 8300000, guid: a236ed6ed1165ca44908f0cfe8c7ed65, type: 3}
   medicalKitSfx: {fileID: 8300000, guid: 53cf5c5c5dac9074ca49332cdad353c8, type: 3}
+  buttonSfx: {fileID: 8300000, guid: 1a97e39d26ac0ff4294cf19635529b70, type: 3}
   hitSfx: {fileID: 0}
   deathSfx: {fileID: 0}

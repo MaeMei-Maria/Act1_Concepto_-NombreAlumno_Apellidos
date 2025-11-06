@@ -6,14 +6,20 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
+    [SerializeField] private SceneManagerSo _sceneManager;
+    
     [Header("Settings")]
     [SerializeField] private int sfxPoolSize = 10;
     [SerializeField] private AudioSource musicSourcePrefab;
     [SerializeField] private AudioSource sfxSourcePrefab;
-    [SerializeField] private AudioLibrarySo audioLibrary; // ← Nuevo ScriptableObject con tus clips
+    
+    public AudioLibrarySo audioLibrary; // ← Nuevo ScriptableObject con tus clips
 
     private List<AudioSource> sfxPool = new();
     private AudioSource musicSource;
+    
+    //Tabla de música por escena
+    private Dictionary<string, AudioClip> musicByScene;
 
     private void Awake()
     {
@@ -37,6 +43,13 @@ public class AudioManager : MonoBehaviour
             sfxPool.Add(sfx);
         }
 
+        //Inicializar mapa de música por escena
+        musicByScene = new Dictionary<string, AudioClip>
+        {
+            { _sceneManager.MainMenuSceneName, audioLibrary.mainMenuTheme },
+            { _sceneManager.InGameSceneName,  audioLibrary.level1Theme },
+        };
+        
         // Escuchar cambio de escena
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -50,21 +63,10 @@ public class AudioManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Cambia música según el nombre de la escena
-        switch (scene.name)
-        {
-            case "MainMenu":
-                PlayMusic(audioLibrary.mainMenuTheme, 0.8f);
-                break;
-
-            case "Level1":
-                PlayMusic(audioLibrary.level1Theme, 0.7f);
-                break;
-
-            default:
-                StopMusic();
-                break;
-        }
+        if (musicByScene.TryGetValue(scene.name, out var clip))
+            PlayMusic(clip);
+        else
+            StopMusic();
     }
 
     public void PlayMusic(AudioClip clip, float volume = 1f)
@@ -79,8 +81,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopMusic() => musicSource.Stop();
 
-    public void SetMusicVolume(float volume) =>
-        musicSource.volume = Mathf.Clamp01(volume);
+    public void SetMusicVolume(float volume) => musicSource.volume = Mathf.Clamp01(volume);
 
     // ------------------ EFECTOS ------------------ //
 

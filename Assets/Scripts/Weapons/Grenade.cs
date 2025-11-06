@@ -21,9 +21,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float explosionForce = 200f;
     [SerializeField] private LayerMask damageLayerMask;
     [SerializeField] private bool obstaclesInMiddle = true; //Si hay un obstáculo delante de, por ejemplo, un enemigo, no le hace daño.
-
-    [SerializeField] private AudioClip explosionFX;
-
+    
     private Rigidbody _rigidbody;
     private bool hasExploded = false;
 
@@ -63,7 +61,7 @@ public class Grenade : MonoBehaviour
             }
         }
 
-        AudioManager.Instance.PlaySFX(explosionFX);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.grenadeSfx);
         
         //Hacer aparecer las partículas en la posición y rotación de la granada
         var explosion = grenadeParticlesPool.Get();

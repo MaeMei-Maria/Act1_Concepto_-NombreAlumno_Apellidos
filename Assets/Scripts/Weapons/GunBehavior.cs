@@ -9,7 +9,6 @@ public class GunBehavior : Weapon
     
     [SerializeField] private float damageDistance = 500f;
     [SerializeField] private float damageAmount = 20f;
-    [SerializeField] private AudioClip shot;
 
     private ObjectPool<ParticlesBehavior> gunParticlesPool;
     
@@ -26,7 +25,7 @@ public class GunBehavior : Weapon
     {
         if(playerAmmoSystem.CurrentAmmoGun <= 0) return; //Evitamos volver a disparar si no hay balas.
         
-        AudioManager.Instance.PlaySFX(shot);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.playerGunShootSfx);
         
         //Disparamos partículas
         gunParticlesPool.Get();

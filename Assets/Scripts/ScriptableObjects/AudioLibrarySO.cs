@@ -15,7 +15,8 @@ public class AudioLibrarySo : ScriptableObject
     public AudioClip grenadeSfx;
     public AudioClip ammoBoxSfx;
     public AudioClip medicalKitSfx;
-    
+    public AudioClip buttonSfx;
+
     public AudioClip hitSfx;
     public AudioClip deathSfx;
 }

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ece3c2604a9b5424691e31d27837d6b8
   - enabled: 1
-    path: Assets/Scenes/SciFi_Warehouse.unity
+    path: Assets/Scenes/Level.unity
     guid: 04ba57353b4f0284686265d3d150c23c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e0793e3b22c0784c95a197c7b6631b0, type: 2}

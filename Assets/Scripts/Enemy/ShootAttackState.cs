@@ -14,7 +14,6 @@ public class ShootAttackState : States<EnemyController>, IEnemyAttack
     [SerializeField] private GameObject gunGameObject;
     [SerializeField] private EnemyBullet bulletPrefab;
     [SerializeField] private float offSet = 10f;
-    [SerializeField] private AudioClip shot;
     
     private ObjectPool<EnemyBullet> bulletPool;
 
@@ -72,7 +71,7 @@ public class ShootAttackState : States<EnemyController>, IEnemyAttack
     private void OnShootAttack()
     {
         var bullet = bulletPool.Get();
-        AudioManager.Instance.PlaySFX(shot);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.enemyShootSfx);
         Vector3 targetDirection = (_controller.Target.position - firePoint.position).normalized;
         
         if (!bullet.IsActive)

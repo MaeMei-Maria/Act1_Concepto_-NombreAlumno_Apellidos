@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     public event Action<float> OnScroll;
     public event Action<int> OnNewWeapon;
 
+    public event Action OnContinueDialogue;
     public event Action OnInteract;
     
     private PlayerInput playerInput;
@@ -38,6 +39,7 @@ public class InputController : MonoBehaviour
         playerInput.actions["Weapon2"].started += OnWeapon2;
         playerInput.actions["UseWeapon"].started += UsingWeapon;
         playerInput.actions["Interact"].started += OnInteraction;
+        playerInput.actions["Continue"].started += ContinueDialogue;
     }
     
     private void UsingWeapon(InputAction.CallbackContext obj)
@@ -80,6 +82,11 @@ public class InputController : MonoBehaviour
         OnInteract?.Invoke();
     }
 
+    private void ContinueDialogue(InputAction.CallbackContext obj)
+    {
+        OnContinueDialogue?.Invoke();
+    }
+
     private void OnDisable()
     {
         playerInput.actions["Jump"].started -= OnJumpStarted;
@@ -89,5 +96,5 @@ public class InputController : MonoBehaviour
         playerInput.actions["Weapon1"].started -= OnWeapon1;
         playerInput.actions["Weapon2"].started -= OnWeapon2;
         playerInput.actions["Interact"].started -= OnInteraction;
-    }
+    } 
 }
