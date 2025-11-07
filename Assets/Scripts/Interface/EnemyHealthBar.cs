@@ -5,22 +5,25 @@ using UnityEngine.UI;
 public class EnemyHealthBar : MonoBehaviour
 {
     [SerializeField] private EventManagerSO _eventManagerSo;
+    private EnemyHealthSystem healthSystem;
     [SerializeField] private Image healthBar;
 
     private Camera _camera;
     private void Awake()
     {
+        healthSystem = GetComponentInParent<EnemyHealthSystem>();
         _camera = Camera.main;   
     }
 
     private void OnEnable()
     {
-        _eventManagerSo.OnEnemyDamaged += UpdateHealthBar;
+        healthSystem.OnHealthChanged += UpdateHealthBar;
     }
 
-    private void UpdateHealthBar(float currentHealth, float maxHealth)
+    private void UpdateHealthBar(float current, float max)
     {
-        healthBar.fillAmount = currentHealth / maxHealth;
+        if (healthBar != null)
+            healthBar.fillAmount = current / max;
     }
 
     private void LateUpdate()
@@ -31,6 +34,6 @@ public class EnemyHealthBar : MonoBehaviour
 
     private void OnDisable()
     {
-        _eventManagerSo.OnEnemyDamaged -= UpdateHealthBar;
+        healthSystem.OnHealthChanged -= UpdateHealthBar;
     }
 }

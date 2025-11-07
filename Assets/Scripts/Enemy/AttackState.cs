@@ -11,6 +11,7 @@ public class AttackState : States<EnemyController>, IEnemyAttack
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius = 1f;
     [SerializeField] private int damage = 15;
+    
     public override void OnEnter()
     {
         
@@ -23,10 +24,19 @@ public class AttackState : States<EnemyController>, IEnemyAttack
         
         transform.DOLookAt(_controller.Target.transform.position, smoothGaze, AxisConstraint.Y);
     }
-
-    public void OnAttack(Transform target)
+    
+    public void OnAttack(Transform target) //Se llama mediante un evento de animación
     {
-        
+        Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius);
+
+        foreach (Collider coll in colliders)
+        {
+            if(coll.TryGetComponent(out PlayerHealthSystem playerHealth))
+            {
+                playerHealth.TakeDamage(damage);
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.punchSfx);
+            }
+        }
     }
     
     private void AttackFinished() //Se llama mediante un evento de animación y comprueba la distancia al finalizar el ataque
@@ -36,19 +46,6 @@ public class AttackState : States<EnemyController>, IEnemyAttack
             _controller.Animator.SetBool(Attacking, false);
             _controller.Agent.isStopped = false;
             _controller.SetState(_controller.ChaseState);
-        }
-    }
-
-    private void OnAttack()
-    {
-        Collider[] colliders = Physics.OverlapSphere(attackPoint.position, attackRadius);
-
-        foreach (Collider coll in colliders)
-        {
-            if(coll.TryGetComponent(out PlayerHealthSystem playerHealth))
-            {
-                playerHealth.TakeDamage(damage);
-            }
         }
     }
     

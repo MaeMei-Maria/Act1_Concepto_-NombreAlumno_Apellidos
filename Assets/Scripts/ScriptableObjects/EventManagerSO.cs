@@ -10,8 +10,7 @@ public class EventManagerSO : ScriptableObject
     public event Action<float, float> OnPlayerUseGrenade;
     public event Action<float, float> OnAmmoGunGetted;
     public event Action<float, float> OnAmmoGrenadeGetted;
-    public event Action<float, float> OnEnemyDamaged;
-
+    public event Action<GameObject, float, float> OnEnemyDamaged;    
     public void PlayerNotifiesDamaged(float currentHealth, float maxHealth)
     {
         OnPlayerDamaged?.Invoke(currentHealth, maxHealth);
@@ -26,7 +25,7 @@ public class EventManagerSO : ScriptableObject
     {
         OnPlayerUseGrenade?.Invoke(currentAmmoGrenade, maxAmmoGrenade);
     }
-
+    
     public void InteractableNotifiesHealling(float currentHealth, float maxHealth)
     {
         OnPlayerHealed?.Invoke(currentHealth, maxHealth);
@@ -42,9 +41,9 @@ public class EventManagerSO : ScriptableObject
         OnAmmoGrenadeGetted?.Invoke(currentAmmo, maxAmmo);
     }
 
-    public void EnemyNotifiesDamaged(float currentHealth, float maxHealth)
+    public void EnemyNotifiesDamaged(GameObject enemy, float currentHealth, float maxHealth)
     {
-        OnEnemyDamaged?.Invoke(currentHealth, maxHealth);
+        OnEnemyDamaged?.Invoke(enemy, currentHealth, maxHealth);
     }
 }
 

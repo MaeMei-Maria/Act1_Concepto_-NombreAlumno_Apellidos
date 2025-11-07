@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerHealthSystem : MonoBehaviour
 {
     [SerializeField] private EventManagerSO eventManager;
-    [SerializeField] private FirstPersonController playerController;
+    [SerializeField] private PlayerMain _playerMain;
     [SerializeField] private float maxHealth = 100f;
 
     private float currentHealth;
-
+    
     private void Awake()
     {
-        playerController = GetComponent<FirstPersonController>();
+        _playerMain = GetComponentInParent<PlayerMain>();
         currentHealth = maxHealth;
     }
 
@@ -18,12 +20,23 @@ public class PlayerHealthSystem : MonoBehaviour
     {
         currentHealth -= damage;
         eventManager.PlayerNotifiesDamaged(currentHealth, maxHealth);
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.shotHitSfx);
 
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            playerController.OnDeath();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.playerDeathSfx);
+
+            StartCoroutine(NotifyDeathDelayed());
         }
+    }
+    
+    private IEnumerator NotifyDeathDelayed()
+    {
+        yield return new WaitForSeconds(0.5f); // 🔹 espera 1 frame
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.playerDeathSfx);
+        _playerMain.NotifyDeath();
     }
 
     public void Heal(float healAmount)

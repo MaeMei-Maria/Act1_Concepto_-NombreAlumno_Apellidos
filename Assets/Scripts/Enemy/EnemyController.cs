@@ -12,6 +12,8 @@ namespace FSM.Enemy
         [SerializeField] private float timeToDestroy = 4.5f;
         [SerializeField] private EventManagerSO _eventManagerSO;
 
+        private EnemyHealthSystem healthSystem;
+
         public PatrolState PatrolState { get; set; }
         public Transform Target { get; set; }
         public Animator Animator { get; set; }
@@ -38,6 +40,8 @@ namespace FSM.Enemy
             MeleeAttackState = GetComponent<AttackState>();
             ShootAttackState = GetComponent<ShootAttackState>();
 
+            healthSystem = GetComponent<EnemyHealthSystem>();
+            
             // Inicializar los estados con el controlador
             PatrolState?.InitController(this);
             ChaseState?.InitController(this);
@@ -49,6 +53,11 @@ namespace FSM.Enemy
 
             currentHealth = maxHealth;
             SetState(PatrolState);
+        }
+
+        private void OnEnable()
+        {
+            healthSystem.OnEnemyDied += EnemyDead;
         }
 
         // Cambiar ataque dinámicamente
@@ -65,23 +74,8 @@ namespace FSM.Enemy
                 SetState(state);
         }
 
-        public void OnDamage(float damageAmount)
+        private void EnemyDead()
         {
-            currentHealth -= damageAmount;
-
-            if (currentHealth <= 0)
-            {
-                currentHealth = 0;
-                Death();
-            }
-
-            _eventManagerSO.EnemyNotifiesDamaged(currentHealth, maxHealth);
-        }
-
-        private void Death()
-        {
-            if (dead) return;
-
             MonoBehaviour[] states = { PatrolState, ChaseState, MeleeAttackState, ShootAttackState };
             foreach (var state in states)
                 if (state != null) state.enabled = false;
@@ -93,7 +87,11 @@ namespace FSM.Enemy
             _ragdollSystem.UpdateBonesState(false);
 
             Destroy(gameObject, timeToDestroy);
-            dead = true;
+        }
+
+        private void OnDisable()
+        {
+            healthSystem.OnEnemyDied -= EnemyDead;
         }
     }
 }

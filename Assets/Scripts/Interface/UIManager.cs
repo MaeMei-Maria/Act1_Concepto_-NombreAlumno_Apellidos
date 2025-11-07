@@ -1,17 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    public bool IsDialogueActive { get; private set; } = false;
+
+    [Header("Dialogue Panel")]
+    [SerializeField] private DialogueManagerSo _initialDialogue;
+    [SerializeField] private DialogueManagerSo _finalDialogue;
+    [SerializeField] private DialogueSystem dialogueSystem;
+
+    [Header("HUD")]
+    [SerializeField] private GameObject hudInstance;
+    [SerializeField] private float panelDuration;
     
-    private GameObject hudInstance;
-    private GameObject dialogueInstance;
-    private DialogueSystem dialogueSystem;
+    [Header("Finals")]
+    [SerializeField] private GameObject missionCompletePanel;
+    [SerializeField] private GameObject missionFailedPanel;
+
+    private bool showMissionCompletePanel = false;
 
     private void Awake()
     {
-        dialogueInstance = GetComponentInChildren<DialogueSystem>().gameObject;
-        
         if (Instance == null)
         {
             Instance = this;
@@ -27,21 +39,28 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         hudInstance.SetActive(false);
-        dialogueInstance.SetActive(false);
+        dialogueSystem.gameObject.SetActive(false);
 
         // Estado inicial: mostrar HUD, ocultar diálogo
-        ShowDialogue();
+        ShowInitialDialogue();
     }
 
-    public void ShowDialogue()
+    public void ShowInitialDialogue()
     {
         if (hudInstance != null)
             hudInstance.SetActive(false);
 
-        if (dialogueInstance != null)
+        if (dialogueSystem.gameObject != null)
         {
-            dialogueInstance.SetActive(true);
+            dialogueSystem.SetDialogue(_initialDialogue);
+
+            dialogueSystem.gameObject.SetActive(true);
             dialogueSystem?.StartDialogue(); // Inicia el diálogo manualmente
+            
+            IsDialogueActive = true;
+            
+            // Pausar la escena
+            Time.timeScale = 0f;
         }
     }
 
@@ -50,13 +69,68 @@ public class UIManager : MonoBehaviour
         if (hudInstance != null)
             hudInstance.SetActive(true);
 
-        if (dialogueInstance != null)
-            dialogueInstance.SetActive(false);
+        if (dialogueSystem.gameObject != null)
+            dialogueSystem.gameObject.SetActive(false);
     }
 
+    // Muestra el diálogo final
+    public void ShowFinalDialogue()
+    {
+        hudInstance?.SetActive(false);
+        dialogueSystem.gameObject.SetActive(true);
+
+        // Le pasamos el nuevo diálogo al sistema
+        dialogueSystem.SetDialogue(_finalDialogue);
+
+        IsDialogueActive = true;
+        showMissionCompletePanel = true; // marcar que después viene la victoria
+
+        Time.timeScale = 0f;
+        dialogueSystem.StartDialogue();
+    }
+    
+    public void ShowMissionComplete()
+    {
+        dialogueSystem.gameObject?.SetActive(false);
+
+        StartCoroutine(ShowPanelForSeconds(missionCompletePanel));
+    }
+
+    public void ShowMissionFailed()
+    {
+        hudInstance?.SetActive(false);
+        dialogueSystem.gameObject?.SetActive(false);
+
+        StartCoroutine(ShowPanelForSeconds(missionFailedPanel));
+    }
+    
+    private IEnumerator ShowPanelForSeconds(GameObject panel)
+    {
+        // Pausar la escena
+        Time.timeScale = 0f;
+        
+        panel?.SetActive(true);
+        yield return new WaitForSecondsRealtime(panelDuration);
+        panel?.SetActive(false);
+        SceneFlowManager.Instance.LoadMainMenu();
+    }
+    
     // Este método será llamado por el DialogueSystem al terminar el diálogo
     public void OnDialogueEnded()
     {
         ShowHUD();
+        
+        IsDialogueActive = false;
+        
+        if (showMissionCompletePanel)
+        {
+            showMissionCompletePanel = false;
+            ShowMissionComplete(); // 👈 ahora muestra la victoria tras el diálogo
+        }
+        else
+        {
+            ShowHUD();
+            Time.timeScale = 1f;
+        }
     }
 }

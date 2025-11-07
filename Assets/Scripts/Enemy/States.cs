@@ -4,6 +4,8 @@ public abstract class States<T> : MonoBehaviour where T : FSMController<T> //Le 
 {
     protected T _controller;
 
+    protected PlayerHealthSystem playerHealth;
+
     public virtual void InitController(T controller) //Inicializa el controlador para cualquier estado.
     {
         this._controller = controller;

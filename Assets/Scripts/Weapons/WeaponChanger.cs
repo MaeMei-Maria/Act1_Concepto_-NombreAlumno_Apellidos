@@ -24,11 +24,15 @@ public class WeaponChanger : MonoBehaviour
 
     private void WeaponUsed()
     {
+        if(UIManager.Instance != null && UIManager.Instance.IsDialogueActive) return;
+
         currentWeapon.OnUse();
     }
 
     private void ChangeWeaponWNum(int index)
     {
+        if(UIManager.Instance != null && UIManager.Instance.IsDialogueActive) return;
+
         currentWeapon.gameObject.SetActive(false); //Desactivamos el arma actual
         currentIndex = index; //Se actualiza el índice
 
@@ -38,6 +42,8 @@ public class WeaponChanger : MonoBehaviour
 
     private void ChangeWeaponWScroll(float direction)
     {
+        if(UIManager.Instance != null && UIManager.Instance.IsDialogueActive) return;
+
         currentWeapon.gameObject.SetActive(false); //Desactivamos el arma actual
 
         if (direction > 0)

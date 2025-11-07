@@ -9,6 +9,9 @@ public class PlayerMain : MonoBehaviour
     public event Action<float> OnAmmoGunBoxCollected;
     public event Action<float> OnAmmoGrenadeBoxCollected;
     public event Action<float> OnHealed;
+    
+    public event Action OnBriefCaseGetted;
+    public event Action OnPlayerDeath; // Evento central de muerte
 
     private void Awake()
     {
@@ -39,9 +42,21 @@ public class PlayerMain : MonoBehaviour
     {
         OnAmmoGrenadeBoxCollected?.Invoke(amount);
     }
+    
+    public void PlayerNotifiesBriefCase()
+    {
+        OnBriefCaseGetted?.Invoke();
+        UIManager.Instance.ShowFinalDialogue();
+    }
 
     public void NotifyHealed(float amount)
     {
         OnHealed?.Invoke(amount);
+    }
+    
+    public void NotifyDeath()
+    {
+        OnPlayerDeath?.Invoke();
+        UIManager.Instance.ShowMissionFailed();
     }
 }

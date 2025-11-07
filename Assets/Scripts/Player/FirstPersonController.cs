@@ -19,14 +19,16 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float detectionRadius;
     [SerializeField] private LayerMask isGround;
     
+    private PlayerMain playerMain;
     private Vector3 verticalMove;
     private CharacterController ch_Controller;
     private Camera camera;
     private bool isGrounded;
     private Vector2 movementInput;
     
-    void Start()
+    void Awake()
     {
+        playerMain = GetComponentInParent<PlayerMain>();
         ch_Controller = GetComponent<CharacterController>();
         camera = Camera.main;
         Cursor.lockState = CursorLockMode.Locked; //Bloquea el cursor
@@ -36,6 +38,7 @@ public class FirstPersonController : MonoBehaviour
     {
         InputController.Instance.OnJump += Jump;
         InputController.Instance.OnMove += UpdateMovement;
+        playerMain.OnPlayerDeath += OnDeath;
     }
     private void UpdateMovement(Vector2 inputVector)
     {
@@ -44,6 +47,8 @@ public class FirstPersonController : MonoBehaviour
     
     void Update()
     {
+        if(UIManager.Instance != null && UIManager.Instance.IsDialogueActive) return;
+        
         GroundCheck();
         ApplyGravity();
         MoveAndRotate();
@@ -89,7 +94,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && UIManager.Instance != null && !UIManager.Instance.IsDialogueActive)
         {
             verticalMove.y = Mathf.Sqrt(-2 * jumpForce * gravity);
         }
@@ -106,6 +111,7 @@ public class FirstPersonController : MonoBehaviour
     {
         InputController.Instance.OnJump -=  Jump;
         InputController.Instance.OnMove -=  UpdateMovement;
+        playerMain.OnPlayerDeath -= OnDeath;
     }
 
     private void OnDrawGizmos()
