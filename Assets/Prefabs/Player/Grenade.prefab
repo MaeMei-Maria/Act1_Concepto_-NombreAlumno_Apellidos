@@ -109,7 +109,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be4590f6b835d9647b1e13806ff4e06e, type: 2}
+  - {fileID: 2100000, guid: f8efe95f3c3042b43b2c66a58b8d9e12, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,7 +223,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   obstaclesInMiddle: 1
-  explosionFX: {fileID: 8300000, guid: 2ad8f419de8272446a3bb717cdfc1265, type: 3}
 --- !u!1 &695894007181954953
 GameObject:
   m_ObjectHideFlags: 0

@@ -81,6 +81,8 @@ public class PatrolState : States<EnemyController>
 
     private void OnDisable()
     {
+        StopAllCoroutines(); // asegura que ninguna corrutina siga viva
+
         _controller.Sensor.OnPlayerDetected -= StopPatrol;
     }
 }

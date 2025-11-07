@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Interactables : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject interactionIcon;
-
+    
     public void OnInteractableActivated()
     {
         interactionIcon.SetActive(true);

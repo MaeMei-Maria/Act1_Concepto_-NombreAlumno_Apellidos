@@ -65,18 +65,22 @@ public class EnemyBullet : MonoBehaviour
         ReleasePool();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         if (!IsActive) return;
-        
-        if (other.TryGetComponent<PlayerHealthSystem>(out var playerHealthSystem))
+
+        GameObject other = collision.gameObject;
+
+        // 1️⃣ Si golpea al jugador → le hace daño
+        if (other.CompareTag("Player") && other.TryGetComponent<PlayerHealthSystem>(out var playerHealth))
         {
-            playerHealthSystem.TakeDamage(bulletDamage);
+            playerHealth.TakeDamage(bulletDamage);
         }
 
+        // 2️⃣ En cualquier caso → se desactiva (incluye suelo, paredes, etc.)
         ReleasePool();
     }
-
+    
     public void ReleasePool()
     {
         if (!IsActive) return;

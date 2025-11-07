@@ -80,6 +80,8 @@ namespace FSM.Enemy
             foreach (var state in states)
                 if (state != null) state.enabled = false;
             
+            StopAllCoroutines();
+
             Animator.enabled = false;
             Agent.enabled = false;
             this.enabled = false;
