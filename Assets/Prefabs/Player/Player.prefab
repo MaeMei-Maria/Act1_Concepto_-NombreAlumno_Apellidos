@@ -305,6 +305,7 @@ Transform:
   - {fileID: 6072694884465174704}
   - {fileID: 2613070313650955467}
   - {fileID: 8687819818894611492}
+  - {fileID: 5025367370702582654}
   m_Father: {fileID: 452745698542303021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5346275075267487503
@@ -447,7 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventManager: {fileID: 11400000, guid: e6be14773093fb9439f281d4b0fe38fd, type: 2}
-  playerController: {fileID: 0}
+  _playerMain: {fileID: 0}
   maxHealth: 100
 --- !u!1 &2120494508095320788
 GameObject:
@@ -732,6 +733,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced2e1f6bc5d5304e95226127f3a434a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4895121105297830805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5025367370702582654}
+  - component: {fileID: 3494764757339499590}
+  m_Layer: 6
+  m_Name: ThristSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5025367370702582654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895121105297830805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9074953678154398854}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3494764757339499590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895121105297830805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6f33785ebf633489c94e7990316f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrist: 100
+  thristDecreaseRate: 0.3
+  healthDamageDehydrated: 5
 --- !u!1 &5577145969722604443
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +984,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 3440411518849582214}
   damageDistance: 500
   damageAmount: 20
-  shot: {fileID: 8300000, guid: 2c71374916b02d241b02ea70809bca5a, type: 3}
 --- !u!1001 &6918179225667823944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1059,7 +1106,6 @@ MonoBehaviour:
   shootParticlesPrefab: {fileID: 6836895162391894908, guid: 03d20e4c03a5ce8408de0a7e3b3cf299, type: 3}
   grenadePrefab: {fileID: 3529392503522144818, guid: a4b44abdbd241fa4faf6f507cff9873c, type: 3}
   spawnPoint: {fileID: 6918179225667895926}
-  shot: {fileID: 8300000, guid: ebb228a7de771ce4ab0e6a4a81e90430, type: 3}
 --- !u!4 &6918179225667895922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 453434, guid: 141863aeb86dd534ea8951ec62bcc181, type: 3}

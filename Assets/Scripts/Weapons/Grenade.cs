@@ -18,12 +18,9 @@ public class Grenade : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float damageRadius = 4f;
     [SerializeField] private float damageGenerated = 25f;
-    [SerializeField] private float explosionForce = 200f;
     [SerializeField] private LayerMask damageLayerMask;
-    [SerializeField] private bool obstaclesInMiddle = true; //Si hay un obstáculo delante de, por ejemplo, un enemigo, no le hace daño.
     
     private Rigidbody _rigidbody;
-    private bool hasExploded = false;
 
     private void Awake()
     {

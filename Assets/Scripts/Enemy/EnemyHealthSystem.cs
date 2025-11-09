@@ -5,7 +5,6 @@ public class EnemyHealthSystem : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private RagdollSystem ragdollSystem;
-    [SerializeField] private float timeToDestroy = 4.5f;
 
     private float currentHealth;
     private bool isDead;

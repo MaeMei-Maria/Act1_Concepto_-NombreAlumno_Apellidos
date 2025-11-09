@@ -25,3 +25,5 @@ MonoBehaviour:
   shotHitSfx: {fileID: 8300000, guid: d10041c1201c3ba4d89b7b1865456590, type: 3}
   playerDeathSfx: {fileID: 8300000, guid: 9fd19b30ced3e6f4c87525b992ce6f85, type: 3}
   enemyDeathSfx: {fileID: 8300000, guid: ed0c21907a29b344d96c3b6fa4fe1f65, type: 3}
+  drinkSfx: {fileID: 8300000, guid: ab8f6f1d611cf994f8da269dcebae41a, type: 3}
+  stepSfx: {fileID: 8300000, guid: 263f8aaa01d5d0041b082b7b69d9ca02, type: 3}

@@ -27,6 +27,8 @@ public class ParticlesBehavior : MonoBehaviour
         // Esperar hasta que el sistema de partículas deje de estar vivo
         yield return new WaitWhile(() => particleSystemInstance.IsAlive(true));
 
+        transform.SetParent(null);
+
         // Desactivar y devolver al pool
         gameObject.SetActive(false);
         ParticlesPool.Release(this);

@@ -81,7 +81,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5142832010889259742}
   - component: {fileID: 6868449327492094676}
-  - component: {fileID: 2594102699113444126}
+  - component: {fileID: 5751920212428463713}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0.6273585, g: 0.9930575, b: 1, a: 1}
+  m_Color: {r: 0.3537736, g: 1, b: 0.5054098, a: 1}
   m_Intensity: 0.05
   m_Range: 1.07
   m_SpotAngle: 30
@@ -169,7 +169,7 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!114 &2594102699113444126
+--- !u!114 &5751920212428463713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

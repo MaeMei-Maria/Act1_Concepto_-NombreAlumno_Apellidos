@@ -21,4 +21,6 @@ public class AudioLibrarySo : ScriptableObject
     public AudioClip shotHitSfx;
     public AudioClip playerDeathSfx;
     public AudioClip enemyDeathSfx;
+    public AudioClip drinkSfx;
+    public AudioClip stepSfx;
 }

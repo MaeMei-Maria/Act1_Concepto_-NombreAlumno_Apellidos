@@ -50,8 +50,10 @@ public class GunBehavior : Weapon
 
     private void OnGetParticles(ParticlesBehavior newParticles)
     {
-        //Alinear la posición y rotación cada vez que se usan
-        newParticles.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+        //Coloca las partículas como hijas del spawnPoint
+        newParticles.transform.SetParent(spawnPoint, false);
+        newParticles.transform.localPosition = Vector3.zero;
+        newParticles.transform.localRotation = Quaternion.identity;
         
         newParticles.gameObject.SetActive(true);
         newParticles.StartParticlesSystem();

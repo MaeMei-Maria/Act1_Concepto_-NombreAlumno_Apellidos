@@ -100,6 +100,11 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
+    public void WalkSound() //Llamado por evento de animación
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.stepSfx);   
+    }
+    
     public void OnDeath()
     {
         animator.SetTrigger(Death);
