@@ -14,7 +14,7 @@ public class PlayerAmmoSystem : MonoBehaviour
     private void Awake()
     {
         CurrentAmmoGun = maxAmmoGun;
-        CurrentAmmoCluster = maxAmmoCluster;
+        CurrentAmmoCluster = 0;
     }
 
     private void Start()

@@ -18,6 +18,9 @@ public class ChaseState : States<EnemyController>
 
     public override void OnEnter()
     {
+        if (_controller.Agent == null || !_controller.Agent.isOnNavMesh)
+            return;
+        
         _controller.Agent.isStopped = false;
         _controller.Agent.stoppingDistance = chaseStopDistance;
         _controller.Agent.speed = chaseSpeed;
@@ -35,6 +38,9 @@ public class ChaseState : States<EnemyController>
 
     public override void OnUpdate()
     {
+        if (_controller.Agent == null || !_controller.Agent.isOnNavMesh || _controller.Target == null)
+            return;
+        
         _controller.Animator.SetFloat(Speed, _controller.Agent.velocity.magnitude/_controller.MaximumSpeed);
         _controller.Agent.SetDestination(_controller.Target.position);
 

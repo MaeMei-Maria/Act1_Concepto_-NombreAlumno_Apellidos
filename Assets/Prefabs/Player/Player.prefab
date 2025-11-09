@@ -997,7 +997,7 @@ MonoBehaviour:
   gunParticles: {fileID: 6836895162391894908, guid: 42b8fbe0fcd276a40a2863406ec4811d, type: 3}
   spawnPoint: {fileID: 3440411518849582214}
   damageDistance: 500
-  damageAmount: 20
+  damageAmount: 35
 --- !u!1001 &6918179225667823944
 PrefabInstance:
   m_ObjectHideFlags: 0

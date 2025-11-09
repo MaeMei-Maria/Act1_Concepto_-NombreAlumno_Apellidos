@@ -214,10 +214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeParticlesPrefab: {fileID: -8174443527303261384, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
-  impulseForce: 20
+  impulseForce: 10
   timeToRelease: 5
-  damageRadius: 6
-  damageGenerated: 25
+  damageRadius: 7
+  damageGenerated: 50
   damageLayerMask:
     serializedVersion: 2
     m_Bits: 1088

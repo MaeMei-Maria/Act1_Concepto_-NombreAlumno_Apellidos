@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using FSM.Enemy;
 using UnityEngine;
@@ -17,6 +18,11 @@ public class ShootAttackState : States<EnemyController>, IEnemyAttack
     
     private ObjectPool<EnemyBullet> bulletPool;
 
+    private void OnEnable()
+    {
+        _controller.Sensor.OnPlayerLost += StopShooting;
+    }
+
     public override void OnEnter()
     {
         gunGameObject.SetActive(true);
@@ -33,6 +39,12 @@ public class ShootAttackState : States<EnemyController>, IEnemyAttack
     
     public override void OnUpdate()
     {
+        if (_controller.Target == null)
+        {
+            StopShooting(null);
+            return;
+        }
+        
         Vector3 lookTarget = _controller.Target.position + Vector3.right * offSet;
         transform.DOLookAt(lookTarget, smoothGaze, AxisConstraint.Y);
     }
@@ -65,6 +77,18 @@ public class ShootAttackState : States<EnemyController>, IEnemyAttack
         rb.Sleep();
 
         bullet.gameObject.SetActive(false);
+    }
+    
+    private void StopShooting(Transform player)
+    {
+        _controller.Animator.SetBool(Attacking, false);
+        gunGameObject.SetActive(false);
+        _controller.SetState(_controller.ChaseState);
+    }
+    
+    private void OnDisable()
+    {
+        _controller.Sensor.OnPlayerLost -= StopShooting;
     }
 
     // Método que dispara la bala

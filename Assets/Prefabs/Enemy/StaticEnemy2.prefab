@@ -8,13 +8,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2945740297511192223, guid: d5504522938ac994198ac12aeeafb760, type: 3}
+      propertyPath: m_Speed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2981056045829560198, guid: d5504522938ac994198ac12aeeafb760, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3340479091021415781, guid: d5504522938ac994198ac12aeeafb760, type: 3}
       propertyPath: m_Name
-      value: Enemy2 Variant
+      value: StaticEnemy2
       objectReference: {fileID: 0}
     - target: {fileID: 4838190465536602191, guid: d5504522938ac994198ac12aeeafb760, type: 3}
       propertyPath: m_LocalPosition.x

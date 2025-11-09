@@ -35,7 +35,6 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
     private IEnumerator NotifyDeathDelayed()
     {
         yield return new WaitForSeconds(0.5f); // 🔹 espera 1 frame
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.playerDeathSfx);
         _playerMain.NotifyDeath();
     }
 
