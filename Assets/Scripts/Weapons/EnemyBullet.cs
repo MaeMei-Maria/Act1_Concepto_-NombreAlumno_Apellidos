@@ -71,13 +71,12 @@ public class EnemyBullet : MonoBehaviour
 
         GameObject other = collision.gameObject;
 
-        // 1️⃣ Si golpea al jugador → le hace daño
-        if (other.CompareTag("Player") && other.TryGetComponent<PlayerHealthSystem>(out var playerHealth))
+        if (other.CompareTag("Player") && other.TryGetComponent<IDamageable>(out var damageable))
         {
-            playerHealth.TakeDamage(bulletDamage);
+            damageable.ApplyDamage(bulletDamage);
         }
 
-        // 2️⃣ En cualquier caso → se desactiva (incluye suelo, paredes, etc.)
+        // En cualquier caso → se desactiva (incluye suelo, paredes, etc.)
         ReleasePool();
     }
     

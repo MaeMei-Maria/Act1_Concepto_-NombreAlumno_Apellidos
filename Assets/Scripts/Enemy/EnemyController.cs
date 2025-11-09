@@ -19,6 +19,8 @@ namespace FSM.Enemy
         public Animator Animator { get; set; }
         public float MaximumSpeed { get; set; }
         public ChaseState ChaseState { get; set; }
+        public IdleState IdleState { get; set; }
+
 
         // Estados de ataque implementando IEnemyAttack
         public IEnemyAttack CurrentAttackState { get; set; }
@@ -39,7 +41,8 @@ namespace FSM.Enemy
             ChaseState = GetComponent<ChaseState>();
             MeleeAttackState = GetComponent<AttackState>();
             ShootAttackState = GetComponent<ShootAttackState>();
-
+            IdleState = GetComponent<IdleState>();
+            
             healthSystem = GetComponent<EnemyHealthSystem>();
             
             // Inicializar los estados con el controlador
@@ -47,12 +50,18 @@ namespace FSM.Enemy
             ChaseState?.InitController(this);
             MeleeAttackState?.InitController(this);
             ShootAttackState?.InitController(this);
+            IdleState?.InitController(this);
 
             // Inicializar CurrentAttackState (por defecto melee o ranged según componentes)
             CurrentAttackState = (IEnemyAttack)ShootAttackState ?? MeleeAttackState;
 
             currentHealth = maxHealth;
-            SetState(PatrolState);
+            
+            // Elegir estado inicial disponible
+            if (PatrolState != null)
+                SetState(PatrolState);
+            else if (IdleState != null)
+                SetState(IdleState);
         }
 
         private void OnEnable()

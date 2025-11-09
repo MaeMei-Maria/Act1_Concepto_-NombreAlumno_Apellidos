@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6205427424512483137}
   - component: {fileID: 6205427424515907427}
   - component: {fileID: 6205427424514907555}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Stair Rails002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483137
 Transform:
@@ -98,12 +98,12 @@ GameObject:
   - component: {fileID: 6205427424515907429}
   - component: {fileID: 6205427424514907557}
   - component: {fileID: 1099052221314912264}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Incline Walls002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483139
 Transform:
@@ -212,7 +212,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483141
 Transform:
@@ -315,12 +315,12 @@ GameObject:
   - component: {fileID: 6205427424512483143}
   - component: {fileID: 6205427424515907433}
   - component: {fileID: 6205427424514907561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Incline Pipes002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483143
 Transform:
@@ -407,7 +407,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483145
 Transform:
@@ -510,12 +510,12 @@ GameObject:
   - component: {fileID: 6205427424515907437}
   - component: {fileID: 6205427424514907565}
   - component: {fileID: 8660407572311880145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Incline Ceiling002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483147
 Transform:
@@ -618,12 +618,12 @@ GameObject:
   - component: {fileID: 6205427424512483149}
   - component: {fileID: 6205427424515907439}
   - component: {fileID: 6205427424514907567}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Incline Beams002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483149
 Transform:
@@ -707,7 +707,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6205427424512483151
 Transform:
@@ -744,7 +744,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5722233317460094866
 Transform:

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-public class PlayerHealthSystem : MonoBehaviour
+public class PlayerHealthSystem : MonoBehaviour, IDamageable
 {
     [SerializeField] private EventManagerSO eventManager;
     [SerializeField] private PlayerMain _playerMain;
@@ -16,7 +16,7 @@ public class PlayerHealthSystem : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void ApplyDamage(float damage)
     {
         currentHealth -= damage;
         eventManager.PlayerNotifiesDamaged(currentHealth, maxHealth);
@@ -44,4 +44,6 @@ public class PlayerHealthSystem : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + healAmount, maxHealth);
         eventManager.InteractableNotifiesHealling(currentHealth, maxHealth);
     }
+
+    
 }

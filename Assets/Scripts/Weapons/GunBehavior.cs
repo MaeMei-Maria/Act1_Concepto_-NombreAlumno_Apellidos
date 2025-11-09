@@ -34,7 +34,7 @@ public class GunBehavior : Weapon
         {
             if (hitInfo.transform.TryGetComponent(out EnemyBones enemyBone))
             {
-                enemyBone.TakeDamage(damageAmount);
+                enemyBone.ApplyDamage(damageAmount);
             }
         }
         

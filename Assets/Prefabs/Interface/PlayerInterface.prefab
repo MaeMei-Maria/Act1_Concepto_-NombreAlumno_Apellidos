@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageImage: {fileID: 0}
-  flashDuration: 0.2
+  flashDuration: 0.5
   maxAlpha: 0.2
   _eventManagerSo: {fileID: 11400000, guid: e6be14773093fb9439f281d4b0fe38fd, type: 2}
 --- !u!1 &2576023052303635904
@@ -710,7 +710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -236.163, y: -8}
+  m_AnchoredPosition: {x: -186.6, y: -8}
   m_SizeDelta: {x: 40.326, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8650922086690590370
@@ -1124,7 +1124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -236.163, y: 8.3}
+  m_AnchoredPosition: {x: -186.6, y: 8.3}
   m_SizeDelta: {x: 40.326, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9041972706782181547

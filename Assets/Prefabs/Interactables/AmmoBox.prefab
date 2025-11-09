@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionIcon: {fileID: 1236043543042646456}
-  ammoBoxAmount: 20
+  ammoBoxAmount: 10
   reloadAmmoClip: {fileID: 8300000, guid: a236ed6ed1165ca44908f0cfe8c7ed65, type: 3}
 --- !u!65 &8807021108088791100
 BoxCollider:

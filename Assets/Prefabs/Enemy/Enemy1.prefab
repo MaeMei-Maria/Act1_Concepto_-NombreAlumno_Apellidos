@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e08678e7ef5624bb49115b3054e7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 4
+  chaseSpeed: 6
   chaseStopDistance: 2.5
 --- !u!114 &525649938977711672
 MonoBehaviour:
@@ -4053,7 +4053,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   ragdollSystem: {fileID: 0}
-  timeToDestroy: 4.5
 --- !u!1 &9108260772383608835
 GameObject:
   m_ObjectHideFlags: 0

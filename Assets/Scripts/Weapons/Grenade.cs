@@ -45,16 +45,15 @@ public class Grenade : MonoBehaviour
 
     private void Explode()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, damageRadius);
+        Collider[] hits = Physics.OverlapSphere(transform.position, damageRadius, damageLayerMask);
         foreach (Collider hit in hits)
         {
-            // buscamos un EnemyBones cercano
-            EnemyBones enemy = hit.GetComponentInParent<EnemyBones>();
-            if (enemy != null)
+            IDamageable damageable = hit.GetComponentInParent<IDamageable>();
+            if (damageable != null)
             {
                 float distance = Vector3.Distance(transform.position, hit.transform.position);
                 float damage = Mathf.Clamp01(1 - (distance / damageRadius)) * damageGenerated;
-                enemy.TakeDamage(damage);
+                damageable.ApplyDamage(damage);
             }
         }
 

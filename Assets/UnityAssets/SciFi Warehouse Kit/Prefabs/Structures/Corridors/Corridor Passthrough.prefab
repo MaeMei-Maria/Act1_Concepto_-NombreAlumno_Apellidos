@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528018916316870403
 Transform:
@@ -47,12 +47,12 @@ GameObject:
   - component: {fileID: 2528018916316870405}
   - component: {fileID: 2528018916320261923}
   - component: {fileID: 2528018916319294947}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Beams
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528018916316870405
 Transform:
@@ -134,12 +134,12 @@ GameObject:
   - component: {fileID: 2528018916320261925}
   - component: {fileID: 2528018916319294949}
   - component: {fileID: 8127526154221416189}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528018916316870407
 Transform:
@@ -247,7 +247,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528018916316870457
 Transform:
@@ -349,12 +349,12 @@ GameObject:
   - component: {fileID: 2528018916316870459}
   - component: {fileID: 2528018916320261977}
   - component: {fileID: 2528018916319294745}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Piipes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528018916316870459
 Transform:
@@ -437,12 +437,12 @@ GameObject:
   - component: {fileID: 2528018916319294747}
   - component: {fileID: 422632009493608201}
   - component: {fileID: 998006218707716641}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2528018916316870461
 Transform:

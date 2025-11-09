@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 3354483237135130614}
   - component: {fileID: 3354483237134032182}
   - component: {fileID: 786440038711171618}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Ceiling002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 3354483237132263382}
   - component: {fileID: 3354483237135130608}
   - component: {fileID: 3354483237134032176}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Beams002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 3354483237132263384}
   - component: {fileID: 3354483237135130618}
   - component: {fileID: 3354483237134032186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Piipes002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 3354483237135130616}
   - component: {fileID: 3354483237134032184}
   - component: {fileID: 9196762586767805642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tunnel Walls002
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -29,7 +29,7 @@ public class PlayerMain : MonoBehaviour
         OnAmmoGunBoxCollected += playerAmmoSystem.AddGunAmmo;
         OnAmmoGrenadeBoxCollected += playerAmmoSystem.AddClusterAmmo;
         OnHealed += playerHealthSystem.Heal;
-        OnDehydrated += playerHealthSystem.TakeDamage;
+        OnDehydrated += playerHealthSystem.ApplyDamage;
         OnHydrated += playerThirstSystem.Drink;
     }
 
@@ -38,7 +38,7 @@ public class PlayerMain : MonoBehaviour
         OnAmmoGunBoxCollected -= playerAmmoSystem.AddGunAmmo;
         OnAmmoGrenadeBoxCollected -= playerAmmoSystem.AddClusterAmmo;
         OnHealed -= playerHealthSystem.Heal;
-        OnDehydrated -= playerHealthSystem.TakeDamage;
+        OnDehydrated -= playerHealthSystem.ApplyDamage;
         OnHydrated -= playerThirstSystem.Drink;
     }
 

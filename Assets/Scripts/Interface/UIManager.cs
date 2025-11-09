@@ -112,6 +112,8 @@ public class UIManager : MonoBehaviour
         panel?.SetActive(true);
         yield return new WaitForSecondsRealtime(panelDuration);
         panel?.SetActive(false);
+        Cursor.lockState = CursorLockMode.None; //Bloquea el cursor
+
         SceneFlowManager.Instance.LoadMainMenu();
     }
     

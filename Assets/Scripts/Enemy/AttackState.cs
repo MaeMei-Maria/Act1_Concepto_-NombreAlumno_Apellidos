@@ -33,7 +33,7 @@ public class AttackState : States<EnemyController>, IEnemyAttack
         {
             if(coll.TryGetComponent(out PlayerHealthSystem playerHealth))
             {
-                playerHealth.TakeDamage(damage);
+                playerHealth.ApplyDamage(damage);
                 AudioManager.Instance.PlaySFX(AudioManager.Instance.audioLibrary.punchSfx);
             }
         }
